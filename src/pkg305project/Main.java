@@ -17,6 +17,10 @@ public class Main {
         stem.write();
         art.write();
         
+        //calling the frame to open 
+        Frame1 f=new Frame1();
+        f.show();
+        
         
     }
     
