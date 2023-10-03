@@ -6,6 +6,7 @@
 package pkg305project;
 
 import java.io.*;
+import java.util.StringTokenizer;
 import javax.swing.DefaultListModel;
 
 /**
@@ -20,6 +21,7 @@ public class CoursesCategoryFrame extends javax.swing.JFrame {
     public CoursesCategoryFrame() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,12 +102,13 @@ public class CoursesCategoryFrame extends javax.swing.JFrame {
         
         try {
             
-            BufferedReader read = new BufferedReader(new FileReader("C:\\305 LAB\\305Project\\Courses.txt"));
+            BufferedReader read = new BufferedReader(new FileReader("C:\\Users\\ftoon\\Downloads\\Telegram Desktop\\305Project\\305Project\\STEMCourses.txt"));
             //in order for us to display the results in the gui frame 
             DefaultListModel<String> listModel = new DefaultListModel<>();
             
             while (read.ready()) {
                 String lines = read.readLine();
+               
                 listModel.addElement(lines);   
             }
             jList1.setModel(listModel);
@@ -123,7 +126,7 @@ public class CoursesCategoryFrame extends javax.swing.JFrame {
 
         try {
 
-            BufferedReader read = new BufferedReader(new FileReader("C:\\305 LAB\\305Project\\Courses.txt"));
+            BufferedReader read = new BufferedReader(new FileReader("C:\\Users\\ftoon\\Downloads\\Telegram Desktop\\305Project\\305Project\\ArtCourses.txt"));
             //in order for us to display the results in the gui frame 
             DefaultListModel<String> listModel = new DefaultListModel<>();
 
