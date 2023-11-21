@@ -37,6 +37,7 @@ public class CoursesCategoryFrame extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,6 +61,13 @@ public class CoursesCategoryFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Return to home page");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,8 +84,13 @@ public class CoursesCategoryFrame extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(104, 104, 104))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jButton3)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -91,7 +104,9 @@ public class CoursesCategoryFrame extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -102,7 +117,7 @@ public class CoursesCategoryFrame extends javax.swing.JFrame {
         
         try {
             
-            BufferedReader read = new BufferedReader(new FileReader("C:\\Users\\ftoon\\Downloads\\Telegram Desktop\\305Project\\305Project\\STEMCourses.txt"));
+            BufferedReader read = new BufferedReader(new FileReader("C:\\305 LAB\\305Project\\STEMCourses.txt"));
             //in order for us to display the results in the gui frame 
             DefaultListModel<String> listModel = new DefaultListModel<>();
             
@@ -126,7 +141,7 @@ public class CoursesCategoryFrame extends javax.swing.JFrame {
 
         try {
 
-            BufferedReader read = new BufferedReader(new FileReader("C:\\Users\\ftoon\\Downloads\\Telegram Desktop\\305Project\\305Project\\ArtCourses.txt"));
+            BufferedReader read = new BufferedReader(new FileReader("C:\\305 LAB\\305Project\\ArtCourses.txt"));
             //in order for us to display the results in the gui frame 
             DefaultListModel<String> listModel = new DefaultListModel<>();
 
@@ -141,6 +156,13 @@ public class CoursesCategoryFrame extends javax.swing.JFrame {
             System.out.println("Error Ocurred: " + e);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Frame1 home=new Frame1();
+        home.show(); // open another jframe 
+        dispose(); // close this current frame
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,6 +202,7 @@ public class CoursesCategoryFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane2;

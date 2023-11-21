@@ -19,7 +19,7 @@ public class STEMCourses {
 
     //write method
     public void write() throws IOException{
-        FileWriter fw=new FileWriter("C:\\Users\\ftoon\\Downloads\\Telegram Desktop\\305Project\\305Project\\STEMCourses.txt");
+        FileWriter fw=new FileWriter("C:\\305 LAB\\305Project\\STEMCourses.txt");
         fw.write("1- ARTIFICAL INTALEGENT \n");
         fw.write("2- IP ADRESSING AND SUBNETTING  \n");
         fw.write("3- INFORMATION SECURITY IN PYTHON  \n");
