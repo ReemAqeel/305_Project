@@ -22,6 +22,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
+        
+        //--------------------------IO work------------------------ 
 
         //program will start writing the courses in a file 
         STEMCourses stem = new STEMCourses();
@@ -43,6 +45,7 @@ public class Main {
             Statement st = con.createStatement();
 
             // (4) excute sql statment
+            //_______________Creating the DB_______________
             st.executeUpdate("CREATE DATABASE " + "USERS");
 
             System.out.println("DB created succssfully ");
@@ -55,7 +58,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        //-----------------Creating the table---------------------------
+        //_______________Creating the table_______________
         try {
             String ConnectionURL = "jdbc:mysql://localhost:3306/users";
             con = DriverManager.getConnection(ConnectionURL, "root", "2751088");
@@ -83,8 +86,9 @@ public class Main {
 
     }
 
-    //----------------------------------------------------------------------------  
-    //method for the database sign-up button option  
+    //--------------------------database work methods------------------------ 
+    
+    //method-1 for the database sign-up button option  
     public void usersDBSignUp(String username, String password) {
         // (1) set the path for the database
         String ConnectionURL = "jdbc:mysql://localhost:3306/users";
@@ -98,7 +102,7 @@ public class Main {
             if (isUsernameExists == true) {
                 //window will be dispalyed that will conatain a message indicating
                 //that this user exists already 
-                JOptionPane.showMessageDialog(null, "This username already exists");
+                JOptionPane.showMessageDialog(null, "This username already exist");
                 //otherwise the else function will be executed to insert this username and password to our DB table
             } else {
                 insertData = "INSERT INTO UsersInfo("
@@ -127,7 +131,7 @@ public class Main {
     }
 
     //------------------------------------------------------------
-    //method for the database login button option  
+    //method-2 for the database login button option  
     public void usersDBLogin(String username, String password) {
 
         // (1) set the path for the database
@@ -157,8 +161,8 @@ public class Main {
         }
     }
 
-    //method to check whether a specfic username exists in out DB table or not 
-    //method returns true if the username exists 
+    //method-3 to check whether a specfic username exists in out DB table or not 
+    //method-3 returns true if the username exists 
     private boolean checkUsernameExistence(Connection con, String username) {
         boolean isExist = false;
 
