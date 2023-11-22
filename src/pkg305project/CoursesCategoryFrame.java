@@ -117,7 +117,7 @@ public class CoursesCategoryFrame extends javax.swing.JFrame {
         
         try {
             
-            BufferedReader read = new BufferedReader(new FileReader("C:\\305 LAB\\305Project\\STEMCourses.txt"));
+            BufferedReader read = new BufferedReader(new FileReader("C:\\Users\\Surface\\Downloads\\305project\\STEMCourses.txt"));
             //in order for us to display the results in the gui frame 
             DefaultListModel<String> listModel = new DefaultListModel<>();
             
@@ -141,7 +141,7 @@ public class CoursesCategoryFrame extends javax.swing.JFrame {
 
         try {
 
-            BufferedReader read = new BufferedReader(new FileReader("C:\\305 LAB\\305Project\\ArtCourses.txt"));
+            BufferedReader read = new BufferedReader(new FileReader("C:\\Users\\Surface\\Downloads\\305project\\ArtCourses.txt"));
             //in order for us to display the results in the gui frame 
             DefaultListModel<String> listModel = new DefaultListModel<>();
 

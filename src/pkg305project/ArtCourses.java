@@ -19,10 +19,10 @@ public class ArtCourses {
     
     //write method
     public void write() throws IOException{
-        FileWriter fw=new FileWriter("C:\\305 LAB\\305Project\\ArtCourses.txt",true);
-        fw.write("4- CERAMIC ARTS \n");
-        fw.write("5- VISUAL ARTS  \n");
-        fw.write("6- HAND CRAFTS AND SCULPTURING  \n");
+        FileWriter fw=new FileWriter("C:\\Users\\Surface\\Downloads\\305project\\ArtCourses.txt",true);
+        fw.write("1- CERAMIC ARTS \n");
+        fw.write("2- VISUAL ARTS  \n");
+        fw.write("3- HAND CRAFTS AND SCULPTURING  \n");
         fw.write("---------------------------------  \n");
         
         fw.close();
