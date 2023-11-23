@@ -98,7 +98,7 @@ public class Main {
         try {
             con = DriverManager.getConnection(ConnectionURL, "root", "2751088");
             //checking whether this user exists in the DB table 
-            boolean isUsernameExists = checkUsernameExistence(con, username);
+            boolean isUsernameExists = checkUserExistence(con, username, password);
             if (isUsernameExists == true) {
                 //window will be dispalyed that will conatain a message indicating
                 //that this user exists already 
@@ -142,7 +142,7 @@ public class Main {
         try {
             con = DriverManager.getConnection(ConnectionURL, "root", "2751088");
             //checking whether this user exists in the DB table 
-            boolean isUsernameExists = checkUsernameExistence(con, username);
+            boolean isUsernameExists = checkUserExistence(con, username,password);
             if (isUsernameExists == true) {
                 AccountFrame name=new AccountFrame();
                 LoginFrame lf=new LoginFrame();
@@ -161,24 +161,27 @@ public class Main {
         }
     }
 
-    //method-3 to check whether a specfic username exists in out DB table or not 
+    //method-3 to check whether a specfic username & password exists in out DB table or not 
     //method-3 returns true if the username exists 
-    private boolean checkUsernameExistence(Connection con, String username) {
-        boolean isExist = false;
+    private boolean checkUserExistence(Connection con, String username, String password) {
+    boolean userExists = false;
 
-        try {
-            String query = "SELECT * FROM UsersInfo WHERE Name=?";
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, username);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                //if the result set has any rows, the username exists
-                isExist = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    try {
+        String query = "SELECT * FROM UsersInfo WHERE Name=? AND Password=?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, username);
+        ps.setString(2, password);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            // If the result set has any rows, the username and password combination exists
+            userExists = true;
         }
-        return isExist;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return userExists;
+}
+
 
 }
