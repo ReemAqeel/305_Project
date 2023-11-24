@@ -153,7 +153,7 @@ public class Main {
                 //otherwise the else function will be executed to insert this username and password to our DB table
             } else {
                 JOptionPane.showMessageDialog(null, "Sorry, but you don't have an account yet\n"
-                        + "try signing up :)");
+                        + "try signing up");
 
             }
         } catch (SQLException ex) {
@@ -182,6 +182,25 @@ public class Main {
     }
     return userExists;
 }
+    //method-4 for the customer service to add a course
+    public void AddCourseQuery( String username, String password,String newCourse) throws SQLException{
+       //intiating the connection 
+       Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/users", "root", "2751088");
+       //update the course attribute in the UserInfo table from null to the required course
+       String updateQuery = "UPDATE UserInfo SET course = ? WHERE username = ? AND password = ?";
+       try (PreparedStatement preparedStatement = con.prepareStatement(updateQuery)) {
+                preparedStatement.setString(1, newCourse);
+                preparedStatement.setString(2, username);
+                preparedStatement.setString(3, password);
 
+                int rowsAffected = preparedStatement.executeUpdate();
 
+                if (rowsAffected > 0) {
+                    System.out.println("Course updated successfully for user: " + username);
+                } else {
+                    System.out.println("User not found or password incorrect.");
+                }
+    }
+
+    }
 }
