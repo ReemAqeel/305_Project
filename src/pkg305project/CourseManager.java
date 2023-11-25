@@ -15,6 +15,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,51 +26,75 @@ import java.util.stream.Collectors;
 
 public class CourseManager {
 
-    private String filePath;
+    //private String filePath;
+    String username;
+    String password;
+    String CourseName;
+    private Connection con;
 
-    public CourseManager(String filePath) {
-        this.filePath = filePath;
+//    public CourseManager(String filePath) {
+//        this.filePath = filePath;
+//    }
+    //constructors
+    public CourseManager(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public void addCourse(String courseName, String courseDetails) {
-        // Use BufferedWriter to write to a file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            // Construct the course entry
-            String courseEntry = courseName + " - " + courseDetails + "\n";
-
-            // Write the course entry to the file
-            writer.write(courseEntry);
-
-            System.out.println("Course added successfully: " + courseEntry);
-        } catch (IOException e) {
-            System.err.println("Error occurred while adding the course: " + e.getMessage());
-        }
+    public CourseManager(String username, String password, String CourseName) {
+        this.username = username;
+        this.password = password;
+        this.con = con;
     }
 
-    public void deleteCourse(String courseName) {
-        // Read all lines from the file
-        try {
-            // Read all lines from the file
-            List<String> lines = Files.readAllLines(Paths.get(filePath));
+    public CourseManager(String username, String password, Connection con) {
+        this.username = username;
+        this.password = password;
+        this.con = con;
+    }
 
-            // Filter out the line containing the course to be deleted
-            List<String> updatedLines = lines.stream()
-                    .filter(line -> !line.contains(courseName))
-                    .collect(Collectors.toList());
+    //----------------method-1 for the Manager to add a course----------------
+    public void AddCourseQuery() throws SQLException {
+        //intiating the connection 
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/users", "root", "2751088");
+        //update the course attribute in the UserInfo table from null to the required course
+        String updateQuery = "UPDATE UserInfo SET course = ? WHERE username = ? AND password = ?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(updateQuery)) {
+            preparedStatement.setString(1, CourseName);
+            preparedStatement.setString(2, username);
+            preparedStatement.setString(3, password);
 
-            // Rewrite the file without the deleted course
-            try (FileWriter writer = new FileWriter(filePath)) {
-                for (String line : updatedLines) {
-                    writer.write(line + System.lineSeparator());
-                }
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Course updated successfully for user: " + username);
+            } else {
+                System.out.println("User not found or password incorrect.");
             }
-
-            System.out.println("Course deleted successfully: " + courseName);
-        } catch (IOException e) {
-            System.err.println("Error occurred while deleting the course: " + e.getMessage());
         }
+
     }
+ //----------------method-2 for the Manager to delete a course----------------
+    public void DeleteCourseQuery() throws SQLException {
 
+        //intiating the connection 
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/users", "root", "2751088");
+        // Delete the course for the specific user
+         // Delete the specific course for the user
+            String deleteQuery = "UPDATE UserInfo SET course = NULL WHERE username = ? AND password = ? AND course = ?";
+            try (PreparedStatement preparedStatement = con.prepareStatement(deleteQuery)) {
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, password);
+                preparedStatement.setString(3, CourseName);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+               System.out.println("Course '" + CourseName + "' deleted successfully for user: " + username);
+            } else {
+                System.out.println("User not found or password incorrect.");
+            }
+        }
+
+    }
 }
-
-
